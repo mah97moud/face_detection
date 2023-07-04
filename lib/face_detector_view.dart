@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
@@ -6,7 +8,9 @@ import 'detector_view.dart';
 import 'widgets/face_detector_painter.dart';
 
 class FaceDetectorView extends StatefulWidget {
-  const FaceDetectorView({super.key});
+  const FaceDetectorView({
+    super.key,
+  });
 
   @override
   State<FaceDetectorView> createState() => _FaceDetectorViewState();
@@ -44,6 +48,14 @@ class _FaceDetectorViewState extends State<FaceDetectorView> {
     );
   }
 
+  // Future<File?> getImageFile(InputImage? inputImage) async {
+  //
+  //   if (inputImage == null) {
+  //     return null;
+  //   }
+  //   return File(inputImage.filePath!);
+  // }
+
   Future<void> _processImage(InputImage inputImage) async {
     if (!_canProcess) return;
     if (_isBusy) return;
@@ -61,14 +73,22 @@ class _FaceDetectorViewState extends State<FaceDetectorView> {
         _cameraLensDirection,
       );
       _customPaint = CustomPaint(painter: painter);
+      // getImageFile(inputImage);
     } else {
       String text = 'Faces found: ${faces.length}\n\n';
       for (final face in faces) {
         text += 'face: ${face.boundingBox}\n\n';
       }
       _text = text;
-      // TODO: set _customPaint to draw boundingRect on top of image
+      // final painter = FaceDetectorPainter(
+      //   faces,
+      //   inputImage.metadata!.size,
+      //   inputImage.metadata!.rotation,
+      //   _cameraLensDirection,
+      // );
+      // _customPaint = CustomPaint(painter: painter);
       _customPaint = null;
+      // getImageFile(inputImage);
     }
     _isBusy = false;
     if (mounted) {

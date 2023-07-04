@@ -28,7 +28,6 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  image_picker: ^1.0.0
   google_mlkit_face_detection: ^0.7.0
   flutter:
     sdk: flutter
@@ -39,6 +38,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   camera: ^0.10.5+2
   google_mlkit_commons: ^0.4.0
+  flutter_face_api: ^5.1.6
+  tflite_flutter: ^0.10.1
 
 dev_dependencies:
   flutter_test:

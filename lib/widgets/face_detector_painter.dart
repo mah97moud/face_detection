@@ -23,11 +23,7 @@ class FaceDetectorPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final Paint paint1 = Paint()
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 1.0
-      ..color = Colors.red;
-    final Paint paint2 = Paint()
-      ..style = PaintingStyle.fill
-      ..strokeWidth = 1.0
+      ..strokeWidth = 1.5
       ..color = Colors.green;
 
     for (final Face face in faces) {
@@ -64,66 +60,66 @@ class FaceDetectorPainter extends CustomPainter {
         Rect.fromLTRB(left, top, right, bottom),
         paint1,
       );
-
-      void paintContour(FaceContourType type) {
-        final contour = face.contours[type];
-        if (contour?.points != null) {
-          for (final Point point in contour!.points) {
-            canvas.drawCircle(
-                Offset(
-                  translateX(
-                    point.x.toDouble(),
-                    size,
-                    imageSize,
-                    rotation,
-                    cameraLensDirection,
-                  ),
-                  translateY(
-                    point.y.toDouble(),
-                    size,
-                    imageSize,
-                    rotation,
-                    cameraLensDirection,
-                  ),
-                ),
-                1,
-                paint1);
-          }
-        }
-      }
-
-      void paintLandmark(FaceLandmarkType type) {
-        final landmark = face.landmarks[type];
-        if (landmark?.position != null) {
-          canvas.drawCircle(
-              Offset(
-                translateX(
-                  landmark!.position.x.toDouble(),
-                  size,
-                  imageSize,
-                  rotation,
-                  cameraLensDirection,
-                ),
-                translateY(
-                  landmark.position.y.toDouble(),
-                  size,
-                  imageSize,
-                  rotation,
-                  cameraLensDirection,
-                ),
-              ),
-              2,
-              paint2);
-        }
-      }
-
-      for (final type in FaceContourType.values) {
-        paintContour(type);
-      }
-
-      for (final type in FaceLandmarkType.values) {
-        paintLandmark(type);
-      }
+      //
+      // void paintContour(FaceContourType type) {
+      //   final contour = face.contours[type];
+      //   if (contour?.points != null) {
+      //     for (final Point point in contour!.points) {
+      //       canvas.drawCircle(
+      //           Offset(
+      //             translateX(
+      //               point.x.toDouble(),
+      //               size,
+      //               imageSize,
+      //               rotation,
+      //               cameraLensDirection,
+      //             ),
+      //             translateY(
+      //               point.y.toDouble(),
+      //               size,
+      //               imageSize,
+      //               rotation,
+      //               cameraLensDirection,
+      //             ),
+      //           ),
+      //           1,
+      //           paint1);
+      //     }
+      //   }
+      // }
+      //
+      // void paintLandmark(FaceLandmarkType type) {
+      //   final landmark = face.landmarks[type];
+      //   if (landmark?.position != null) {
+      //     canvas.drawCircle(
+      //         Offset(
+      //           translateX(
+      //             landmark!.position.x.toDouble(),
+      //             size,
+      //             imageSize,
+      //             rotation,
+      //             cameraLensDirection,
+      //           ),
+      //           translateY(
+      //             landmark.position.y.toDouble(),
+      //             size,
+      //             imageSize,
+      //             rotation,
+      //             cameraLensDirection,
+      //           ),
+      //         ),
+      //         2,
+      //         paint2);
+      //   }
+      // }
+      //
+      // for (final type in FaceContourType.values) {
+      //   paintContour(type);
+      // }
+      //
+      // for (final type in FaceLandmarkType.values) {
+      //   paintLandmark(type);
+      // }
     }
   }
 

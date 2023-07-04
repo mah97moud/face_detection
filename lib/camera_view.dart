@@ -93,8 +93,8 @@ class _CameraViewState extends State<CameraView> {
           ),
           _backButton(),
           _switchLiveCameraToggle(),
-          _detectionViewModeToggle(),
-          _zoomControl(),
+          // _detectionViewModeToggle(),
+          _takePictureButton(),
           _exposureControl(),
         ],
       ),
@@ -156,6 +156,39 @@ class _CameraViewState extends State<CameraView> {
           ),
         ),
       );
+
+  Widget _takePictureButton() => Positioned(
+        bottom: 8,
+        right: MediaQuery.sizeOf(context).width / 2,
+        child: SizedBox(
+          height: 50.0,
+          width: 50.0,
+          child: FloatingActionButton(
+            heroTag: Object(),
+            onPressed: _takePicture,
+            backgroundColor: Colors.black54,
+            child: const Icon(
+              Icons.camera_alt_outlined,
+              size: 25,
+            ),
+          ),
+        ),
+      );
+
+  _takePicture() async {
+    if (_controller == null || _controller!.value.isTakingPicture) return;
+    try {
+      final value = await _controller!.takePicture();
+      final file = File(value.path);
+      final inputImage = InputImage.fromFilePath(file.path);
+      widget.onImage(inputImage);
+      // await _controller!.stopImageStream();
+      if (!mounted) return;
+      Navigator.of(context).pop(inputImage);
+    } on CameraException catch (e) {
+      print(e);
+    }
+  }
 
   Widget _zoomControl() => Positioned(
         bottom: 16,

@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
-import 'package:image_picker/image_picker.dart';
 
 class FaceDetectionScreen extends StatefulWidget {
   const FaceDetectionScreen({super.key});
@@ -16,20 +15,20 @@ class _FaceDetectionScreenState extends State<FaceDetectionScreen> {
   File? _imageFile;
   List<Face> faces = [];
 
-  Future<File?> _pickImage(ImageSource source) async {
-    try {
-      final image = await ImagePicker().pickImage(source: source);
-      if (image == null) return null;
-      setState(() {
-        _imageFile = File(image.path);
-        _detectFaces(_imageFile!);
-      });
-    } catch (e) {
-      if (kDebugMode) {
-        print(e);
-      }
-    }
-  }
+  // Future<File?> _pickImage(ImageSource source) async {
+  //   try {
+  //     final image = await ImagePicker().pickImage(source: source);
+  //     if (image == null) return null;
+  //     setState(() {
+  //       _imageFile = File(image.path);
+  //       _detectFaces(_imageFile!);
+  //     });
+  //   } catch (e) {
+  //     if (kDebugMode) {
+  //       print(e);
+  //     }
+  //   }
+  // }
 
   Future _detectFaces(File image) async {
     final options = FaceDetectorOptions();
@@ -71,39 +70,39 @@ class _FaceDetectionScreenState extends State<FaceDetectionScreen> {
               const SizedBox(
                 height: 10,
               ),
-              SizedBox(
-                width: double.infinity,
-                height: 50.0,
-                child: MaterialButton(
-                  onPressed: () {
-                    _pickImage(ImageSource.camera);
-                  },
-                  child: const Text(
-                    'Take a photo',
-                    style: TextStyle(
-                      fontSize: 23.0,
-                    ),
-                  ),
-                ),
-              ),
+              // SizedBox(
+              //   width: double.infinity,
+              //   height: 50.0,
+              //   child: MaterialButton(
+              //     onPressed: () {
+              //       _pickImage(ImageSource.camera);
+              //     },
+              //     child: const Text(
+              //       'Take a photo',
+              //       style: TextStyle(
+              //         fontSize: 23.0,
+              //       ),
+              //     ),
+              //   ),
+              // ),
               const SizedBox(
                 height: 10,
               ),
-              SizedBox(
-                width: double.infinity,
-                height: 50.0,
-                child: MaterialButton(
-                  onPressed: () {
-                    _pickImage(ImageSource.gallery);
-                  },
-                  child: const Text(
-                    'Pick a photo',
-                    style: TextStyle(
-                      fontSize: 23.0,
-                    ),
-                  ),
-                ),
-              ),
+              // SizedBox(
+              //   width: double.infinity,
+              //   height: 50.0,
+              //   child: MaterialButton(
+              //     onPressed: () {
+              //       _pickImage(ImageSource.gallery);
+              //     },
+              //     child: const Text(
+              //       'Pick a photo',
+              //       style: TextStyle(
+              //         fontSize: 23.0,
+              //       ),
+              //     ),
+              //   ),
+              // ),
               const SizedBox(
                 height: 10,
               ),
